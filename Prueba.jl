@@ -1,3 +1,5 @@
+using Morsel
+
 app = Morsel.app()
 
 route(app, GET | POST | PUT, "/") do req, res
