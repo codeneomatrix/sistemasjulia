@@ -1,13 +1,12 @@
-using Morsel
+using Mux
 
-app = Morsel.app()
+@app test = (
+  Mux.defaults,
+  page(respond("<h1>Hello World!</h1>")),
+  page("/about",
+       probabilty(0.5, respond("<h1>Boo!</h1>")),
+       respond("<h1>About Me</h1>")),
+  page("/user/:user", req -> "<h1>Hello, $(req[:params][:user])!</h1>"),
+  Mux.notfound())
 
-route(app, GET | POST | PUT, "/") do req, res
-    "Esta es una simple prueba de tu existencia, morsel"
-end
-
-get(app, "/about") do req, res
-    "This app is running on Morsel"
-end
-
-start(app, 8000)
+serve(test)
