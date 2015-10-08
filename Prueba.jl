@@ -1,8 +1,19 @@
 using Mux
 
+function leer(url)
+  cadena=""
+  open(url) do f1
+    for linea in eachline(f1)
+        cadena*= linea
+        #println(linea)
+    end
+  end
+  cadena
+end
+
 @app test = (
   Mux.defaults,
-  page(respond("<h1>Hello World!</h1>")),
+  page(respond(leer("/home/sistemas/Escritorio/sistemasjulia/index.html"))),
   page("/about",
        probabilty(0.5, respond("<h1>Boo!</h1>")),
        respond("<h1>About Me</h1>")),
