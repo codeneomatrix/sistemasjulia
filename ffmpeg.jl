@@ -1,36 +1,39 @@
 
 type Cam
 	nombre::String
+	usuario::String
+	contra::String
 	ip::String
 	duracion::String
-	ubicacion::String
-	tamaño::String
+	ubicacionv::String
+	ubicacioni::String
 	imagen::Function
 	video::Function
 end
 
 function optvideo(x::Cam)
-#=
--------------------------------------------------------------video---------------------------------
-ffmpeg -re -i http://admin:@192.168.1.10/video.cgi -ss 00:00:00 -t 00:00:10 -c copy -y /home/neomatrix/Escritorio/vi.avi
-<img style="-webkit-user-select: none" src="http://192.168.1.10/video.cgi">
-=#
-print("video!!!")
+	run(`ffmpeg -re -i http://$(x.usuario):$(x.contra)@$(x.ip)/video.cgi -ss 00:00:00 -t $(x.duracion) -c copy -y $(x.ubicacionv)`)
+	#=
+	-------------------------------------------------------------video---------------------------------
+	ffmpeg -re -i http://admin:@192.168.1.10/video.cgi -ss 00:00:00 -t 00:00:10 -c copy -y /home/neomatrix/Escritorio/vi.avi
+	<img style="-webkit-user-select: none" src="http://192.168.1.10/video.cgi">
+	=#
+	print("ffmpeg -re -i http://$(x.usuario):$(x.contra)@$(x.ip)/video.cgi -ss 00:00:00 -t $(x.duracion) -c copy -y $(x.ubicacionv)")
 end
 
 function optimg(x::Cam)
-#=	
---------------------------------------------------------------imagen------------------------------ experimental
-ffmpeg -i http://admin:@192.168.1.10/video.cgi -frames:v 1 -ss 00:00:00 -f image2 /home/neomatrix/Escritorio/imagen2.jpg
+	run(`ffmpeg -i http://$(x.usuario):$(x.contrase)@$(x.ip)/video.cgi -frames:v 1 -ss 00:00:00 -f image2 $(x.ubicacioni)`)
+	#=	
+	--------------------------------------------------------------imagen------------------------------ experimental
+	ffmpeg -i http://admin:@192.168.1.10/video.cgi -frames:v 1 -ss 00:00:00 -f image2 /home/neomatrix/Escritorio/imagen2.jpg
 
-ffmpeg -i http://admin:@192.168.1.10/image/jpeg.cgi /home/neomatrix/Escritorio/imagen2.jpg
+	ffmpeg -i http://admin:@192.168.1.10/image/jpeg.cgi /home/neomatrix/Escritorio/imagen2.jpg
 
-<img style="-webkit-user-select: none" src="http://192.168.1.10/image/jpeg.cgi">
-=#
-print("imagen!!!")
+	<img style="-webkit-user-select: none" src="http://192.168.1.10/image/jpeg.cgi">
+	=#
+	print("imagen!!!")
 end
 
-cam1 = Cam("c1","192.168.1.12","00.00.10","/home/neomatrix/Escritorio/vi.avi", "1366X768",optimg,optvideo)
-
+cam1 = Cam("c1","admin","","192.168.1.12","00.00.10","/home/neomatrix/Escritorio/vi.avi","/home/neomatrix/Escritorio/imagen2.jpg",optimg,optvideo)
 
 
