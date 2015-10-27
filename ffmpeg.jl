@@ -37,3 +37,7 @@ end
 cam1 = Cam("c1","admin","","192.168.1.12","00.00.10","/home/neomatrix/Escritorio/vi.avi","/home/neomatrix/Escritorio/imagen2.jpg",optimg,optvideo)
 
 
+##de la trendnet-------------------------------------------------------------------------------------------------
+#<img style="-webkit-user-select: none" src="http://192.168.1.13/image/jpeg.cgi">
+#<img style="-webkit-user-select: none" src="http://192.168.1.10/video/mjpg.cgi">
+#ffmpeg -re -i http://admin:@192.168.1.10/video/mjpg -ss 00:00:00 -t 00:00:10 -c copy -y /home/neomatrix/Escritorio/vi.avi
