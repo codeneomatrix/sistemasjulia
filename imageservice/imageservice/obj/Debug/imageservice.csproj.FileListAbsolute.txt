@@ -1,0 +1,13 @@
+c:\users\administrador\documents\visual studio 2012\Projects\imageservice\imageservice\bin\imageservice.dll
+c:\users\administrador\documents\visual studio 2012\Projects\imageservice\imageservice\bin\imageservice.pdb
+c:\users\administrador\documents\visual studio 2012\Projects\imageservice\imageservice\obj\Debug\imageservice.csprojResolveAssemblyReference.cache
+c:\users\administrador\documents\visual studio 2012\Projects\imageservice\imageservice\obj\Debug\imageservice.dll
+c:\users\administrador\documents\visual studio 2012\Projects\imageservice\imageservice\obj\Debug\imageservice.pdb
+C:\Users\Administrador\Documents\Visual Studio 2012\Projects\imageservice\imageservice\bin\AForge.dll
+C:\Users\Administrador\Documents\Visual Studio 2012\Projects\imageservice\imageservice\bin\AForge.Video.DirectShow.dll
+C:\Users\Administrador\Documents\Visual Studio 2012\Projects\imageservice\imageservice\bin\AForge.Video.dll
+C:\Users\Administrador\Documents\Visual Studio 2012\Projects\imageservice\imageservice\bin\AForge.xml
+C:\Users\Administrador\Documents\Visual Studio 2012\Projects\imageservice\imageservice\bin\AForge.Video.xml
+C:\Users\Administrador\Documents\Visual Studio 2012\Projects\imageservice\imageservice\bin\AForge.Video.DirectShow.xml
+C:\Users\Administrador\Documents\Visual Studio 2012\Projects\imageservice\imageservice\bin\NReco.VideoConverter.dll
+C:\Users\Administrador\Documents\Visual Studio 2012\Projects\imageservice\imageservice\bin\NReco.VideoConverter.xml
