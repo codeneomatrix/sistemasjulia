@@ -41,3 +41,13 @@ cam1 = Cam("c1","admin","","192.168.1.12","00.00.10","/home/neomatrix/Escritorio
 #<img style="-webkit-user-select: none" src="http://192.168.1.10/video/mjpg.cgi">
 #ffmpeg -re -i http://admin:Oaxaca123@192.168.1.13/video/mjpg.cgi -ss 00:00:00 -t 00:00:10 -c copy -y /home/neomatrix/Escritorio/vi.avi
 #hay un problema!!!!: Invalid data found when processing input
+
+
+##para hacer streaming -------------------------------------------------------------------------------------------------
+ffmpeg -i http://admin:@192.168.1.10/video/mjpg.cgi -f mpegts udp://192.168.1.11:8090/camara1
+
+##para visualizar el streaming---------------------------------------------------------------------------------------------
+ffplay udp://192.168.1.11:8090/camara1
+
+
+
