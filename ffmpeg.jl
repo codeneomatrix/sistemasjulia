@@ -3,15 +3,11 @@ type Cam
 	usuario::String
 	contra::String
 	ip::String
-	duracion::String
-	ubicacionv::String
-	ubicacioni::String
-	imagen::Function
-	video::Function
 end
 
 function optvideo(x::Cam)
-	run(`ffmpeg -re -i http://$(x.usuario):$(x.contra)@$(x.ip)/video/mjpg.cgi -ss 00:00:00 -t $(x.duracion) -c copy -y $(x.ubicacionv)`)
+	#run(`ffmpeg -re -i http://$(x.usuario):$(x.contra)@$(x.ip)/video/mjpg.cgi -ss 00:00:00 -t $(x.duracion) -c copy -y $(x.ubicacionv)`)
+	run(`ffmpeg -i http://$(x.usuario):$(x.contra)@$(x.ip)/video/mjpg.cgi -f mpegts udp://192.168.1.11:8090/$(x.nombre)`)
 	#=
 	-------------------------------------------------------------video---------------------------------
 	ffmpeg -re -i http://admin:@192.168.1.10/video/mjpg.cgi -ss 00:00:00 -t 00:00:10 -c copy -y /home/neomatrix/Escritorio/vi.avi
@@ -33,7 +29,7 @@ function optimg(x::Cam)
 	print("imagen!!!")
 end
 
-cam1 = Cam("c1","admin","","192.168.1.12","00.00.10","/home/neomatrix/Escritorio/vi.avi","/home/neomatrix/Escritorio/imagen2.jpg",optimg,optvideo)
+##cam1 = Cam("camara1","admin","","192.168.1.12")
 
 
 ##de la trendnet-------------------------------------------------------------------------------------------------
@@ -44,10 +40,10 @@ cam1 = Cam("c1","admin","","192.168.1.12","00.00.10","/home/neomatrix/Escritorio
 
 
 ##para hacer streaming -------------------------------------------------------------------------------------------------
-ffmpeg -i http://admin:@192.168.1.10/video/mjpg.cgi -f mpegts udp://192.168.1.11:8090/camara1
-
+#ffmpeg -i http://admin:@192.168.1.10/video/mjpg.cgi -f mpegts udp://192.168.1.11:8090/camara1
+#ffmpeg -i input -f rtsp -rtsp_transport tcp rtsp://localhost:8888/live.sdp
 ##para visualizar el streaming---------------------------------------------------------------------------------------------
-ffplay udp://192.168.1.11:8090/camara1
+#ffplay udp://192.168.1.11:8090/camara1
 
 
 
