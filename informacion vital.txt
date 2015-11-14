@@ -1,0 +1,423 @@
+
+To test this service, you will need to create a client and use it to call the service. You can do this using the svcutil.exe tool from the command line with the following syntax:
+
+http://localhost:1131/camaras.svc?wsdl
+
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="camaras" targetNamespace="http://tempuri.org/">
+<wsdl:types>
+<xsd:schema targetNamespace="http://tempuri.org/Imports">
+<xsd:import schemaLocation="http://localhost:1131/camaras.svc?xsd=xsd0" namespace="http://tempuri.org/"/>
+<xsd:import schemaLocation="http://localhost:1131/camaras.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+<xsd:import schemaLocation="http://localhost:1131/camaras.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/imageservice"/>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="Icamaras_NuevaCamara_InputMessage">
+<wsdl:part name="parameters" element="tns:NuevaCamara"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_NuevaCamara_OutputMessage">
+<wsdl:part name="parameters" element="tns:NuevaCamaraResponse"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_ObtenerCamara_InputMessage">
+<wsdl:part name="parameters" element="tns:ObtenerCamara"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_ObtenerCamara_OutputMessage">
+<wsdl:part name="parameters" element="tns:ObtenerCamaraResponse"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_EliminarCamara_InputMessage">
+<wsdl:part name="parameters" element="tns:EliminarCamara"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_EliminarCamara_OutputMessage">
+<wsdl:part name="parameters" element="tns:EliminarCamaraResponse"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_video_InputMessage">
+<wsdl:part name="parameters" element="tns:video"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_video_OutputMessage">
+<wsdl:part name="parameters" element="tns:videoResponse"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_imagen_InputMessage">
+<wsdl:part name="parameters" element="tns:imagen"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_imagen_OutputMessage">
+<wsdl:part name="parameters" element="tns:imagenResponse"/>
+</wsdl:message>
+<wsdl:portType name="Icamaras">
+<wsdl:operation name="NuevaCamara">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/NuevaCamara" message="tns:Icamaras_NuevaCamara_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/NuevaCamaraResponse" message="tns:Icamaras_NuevaCamara_OutputMessage"/>
+</wsdl:operation>
+<wsdl:operation name="ObtenerCamara">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/ObtenerCamara" message="tns:Icamaras_ObtenerCamara_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/ObtenerCamaraResponse" message="tns:Icamaras_ObtenerCamara_OutputMessage"/>
+</wsdl:operation>
+<wsdl:operation name="EliminarCamara">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/EliminarCamara" message="tns:Icamaras_EliminarCamara_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/EliminarCamaraResponse" message="tns:Icamaras_EliminarCamara_OutputMessage"/>
+</wsdl:operation>
+<wsdl:operation name="video">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/video" message="tns:Icamaras_video_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/videoResponse" message="tns:Icamaras_video_OutputMessage"/>
+</wsdl:operation>
+<wsdl:operation name="imagen">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/imagen" message="tns:Icamaras_imagen_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/imagenResponse" message="tns:Icamaras_imagen_OutputMessage"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="BasicHttpBinding_Icamaras" type="tns:Icamaras">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="NuevaCamara">
+<soap:operation soapAction="http://tempuri.org/Icamaras/NuevaCamara" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ObtenerCamara">
+<soap:operation soapAction="http://tempuri.org/Icamaras/ObtenerCamara" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="EliminarCamara">
+<soap:operation soapAction="http://tempuri.org/Icamaras/EliminarCamara" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="video">
+<soap:operation soapAction="http://tempuri.org/Icamaras/video" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="imagen">
+<soap:operation soapAction="http://tempuri.org/Icamaras/imagen" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="camaras">
+<wsdl:port name="BasicHttpBinding_Icamaras" binding="tns:BasicHttpBinding_Icamaras">
+<soap:address location="http://localhost:1131/camaras.svc"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
+
+
+
+You can also access the service description as a single file:
+http://localhost:1131/camaras.svc?singleWsdl
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="camaras" targetNamespace="http://tempuri.org/">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+<xs:import namespace="http://schemas.datacontract.org/2004/07/imageservice"/>
+<xs:element name="NuevaCamara">
+<xs:complexType>
+<xs:sequence>
+<xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/imageservice" minOccurs="0" name="cam" nillable="true" type="q1:Camara"/>
+<xs:element minOccurs="0" name="key" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="NuevaCamaraResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="NuevaCamaraResult" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ObtenerCamara">
+<xs:complexType>
+<xs:sequence/>
+</xs:complexType>
+</xs:element>
+<xs:element name="ObtenerCamaraResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/imageservice" minOccurs="0" name="ObtenerCamaraResult" nillable="true" type="q2:ArrayOfCamara"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EliminarCamara">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="nombre" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="key" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EliminarCamaraResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="EliminarCamaraResult" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="video">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="nombre" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="videoResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/imageservice" minOccurs="0" name="videoResult" nillable="true" type="q3:Streaming"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="imagen">
+<xs:complexType>
+<xs:sequence/>
+</xs:complexType>
+</xs:element>
+<xs:element name="imagenResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="imagenResult" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/">
+<xs:element name="anyType" nillable="true" type="xs:anyType"/>
+<xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+<xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+<xs:element name="boolean" nillable="true" type="xs:boolean"/>
+<xs:element name="byte" nillable="true" type="xs:byte"/>
+<xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+<xs:element name="decimal" nillable="true" type="xs:decimal"/>
+<xs:element name="double" nillable="true" type="xs:double"/>
+<xs:element name="float" nillable="true" type="xs:float"/>
+<xs:element name="int" nillable="true" type="xs:int"/>
+<xs:element name="long" nillable="true" type="xs:long"/>
+<xs:element name="QName" nillable="true" type="xs:QName"/>
+<xs:element name="short" nillable="true" type="xs:short"/>
+<xs:element name="string" nillable="true" type="xs:string"/>
+<xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+<xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+<xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+<xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+<xs:element name="char" nillable="true" type="tns:char"/>
+<xs:simpleType name="char">
+<xs:restriction base="xs:int"/>
+</xs:simpleType>
+<xs:element name="duration" nillable="true" type="tns:duration"/>
+<xs:simpleType name="duration">
+<xs:restriction base="xs:duration">
+<xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+<xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+<xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:element name="guid" nillable="true" type="tns:guid"/>
+<xs:simpleType name="guid">
+<xs:restriction base="xs:string">
+<xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:attribute name="FactoryType" type="xs:QName"/>
+<xs:attribute name="Id" type="xs:ID"/>
+<xs:attribute name="Ref" type="xs:IDREF"/>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/imageservice" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/imageservice">
+<xs:complexType name="Camara">
+<xs:sequence>
+<xs:element minOccurs="0" name="contraseña" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="ip" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="nombre" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="Camara" nillable="true" type="tns:Camara"/>
+<xs:complexType name="ArrayOfCamara">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Camara" nillable="true" type="tns:Camara"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="ArrayOfCamara" nillable="true" type="tns:ArrayOfCamara"/>
+<xs:complexType name="Streaming">
+<xs:sequence>
+<xs:element minOccurs="0" name="dominio" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="ffplay" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="ip" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="protocolo" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="puerto" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="Streaming" nillable="true" type="tns:Streaming"/>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="Icamaras_NuevaCamara_InputMessage">
+<wsdl:part name="parameters" element="tns:NuevaCamara"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_NuevaCamara_OutputMessage">
+<wsdl:part name="parameters" element="tns:NuevaCamaraResponse"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_ObtenerCamara_InputMessage">
+<wsdl:part name="parameters" element="tns:ObtenerCamara"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_ObtenerCamara_OutputMessage">
+<wsdl:part name="parameters" element="tns:ObtenerCamaraResponse"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_EliminarCamara_InputMessage">
+<wsdl:part name="parameters" element="tns:EliminarCamara"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_EliminarCamara_OutputMessage">
+<wsdl:part name="parameters" element="tns:EliminarCamaraResponse"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_video_InputMessage">
+<wsdl:part name="parameters" element="tns:video"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_video_OutputMessage">
+<wsdl:part name="parameters" element="tns:videoResponse"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_imagen_InputMessage">
+<wsdl:part name="parameters" element="tns:imagen"/>
+</wsdl:message>
+<wsdl:message name="Icamaras_imagen_OutputMessage">
+<wsdl:part name="parameters" element="tns:imagenResponse"/>
+</wsdl:message>
+<wsdl:portType name="Icamaras">
+<wsdl:operation name="NuevaCamara">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/NuevaCamara" message="tns:Icamaras_NuevaCamara_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/NuevaCamaraResponse" message="tns:Icamaras_NuevaCamara_OutputMessage"/>
+</wsdl:operation>
+<wsdl:operation name="ObtenerCamara">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/ObtenerCamara" message="tns:Icamaras_ObtenerCamara_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/ObtenerCamaraResponse" message="tns:Icamaras_ObtenerCamara_OutputMessage"/>
+</wsdl:operation>
+<wsdl:operation name="EliminarCamara">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/EliminarCamara" message="tns:Icamaras_EliminarCamara_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/EliminarCamaraResponse" message="tns:Icamaras_EliminarCamara_OutputMessage"/>
+</wsdl:operation>
+<wsdl:operation name="video">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/video" message="tns:Icamaras_video_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/videoResponse" message="tns:Icamaras_video_OutputMessage"/>
+</wsdl:operation>
+<wsdl:operation name="imagen">
+<wsdl:input wsaw:Action="http://tempuri.org/Icamaras/imagen" message="tns:Icamaras_imagen_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/Icamaras/imagenResponse" message="tns:Icamaras_imagen_OutputMessage"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="BasicHttpBinding_Icamaras" type="tns:Icamaras">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="NuevaCamara">
+<soap:operation soapAction="http://tempuri.org/Icamaras/NuevaCamara" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ObtenerCamara">
+<soap:operation soapAction="http://tempuri.org/Icamaras/ObtenerCamara" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="EliminarCamara">
+<soap:operation soapAction="http://tempuri.org/Icamaras/EliminarCamara" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="video">
+<soap:operation soapAction="http://tempuri.org/Icamaras/video" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="imagen">
+<soap:operation soapAction="http://tempuri.org/Icamaras/imagen" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="camaras">
+<wsdl:port name="BasicHttpBinding_Icamaras" binding="tns:BasicHttpBinding_Icamaras">
+<soap:address location="http://localhost:1131/camaras.svc"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
+
+
+
+
+
+
+This will generate a configuration file and a code file that contains the client class. Add the two files to your client application and use the generated client class to call the Service. For example:
+
+C#
+
+class Test
+{
+    static void Main()
+    {
+        IcamarasClient client = new IcamarasClient();
+
+        // Use the 'client' variable to call operations on the service.
+
+        // Always close the client.
+        client.Close();
+    }
+}
+
+Visual Basic
+
+Class Test
+    Shared Sub Main()
+        Dim client As IcamarasClient = New IcamarasClient()
+        ' Use the 'client' variable to call operations on the service.
+
+        ' Always close the client.
+        client.Close()
+    End Sub
+End Class
+
+
+
+
+parece ser quew asi se invocan, PARECE!!!!:
+Icamaras.NuevaCamara
+Icamaras.ObtenerCamara
+Icamaras.EliminarCamara
+Icamaras.video
+Icamaras.imagen
+
+SERVICIO
+http://localhost:1131/camaras.svc
+
+Icamaras (BasicHttpBinding_Icamaras)
