@@ -28,7 +28,6 @@ http = HttpHandler() do req::Request, res::Response
         if probstr == "datos"
           return Response(200, "mostrando los datos de la camara1")
         end
-        return Response(200,"hola")
       end
       if ismatch(r"^/camaras/", req.resource)
         reqsplit = split(req.resource, "/")
@@ -85,7 +84,6 @@ http = HttpHandler() do req::Request, res::Response
             </s:Body>
           </s:Envelope>""")
         end
-        return Response(200,"hola")
       else
         # Not a valid URL
         return Response(404)
@@ -93,4 +91,4 @@ http = HttpHandler() do req::Request, res::Response
 end
 
 server = Server( http )
-run(server, host=IPv4(192,168,2,112), port=9000)
+run(server, host=IPv4(192,168,0,4), port=9000)
