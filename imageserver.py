@@ -1,5 +1,6 @@
 import SOAPpy
-
+import os
+os.system('ffmpeg -i http://admin:@192.168.1.10/video/mjpg.cgi -f mpegts udp://192.168.1.11:8090/camara1')
 class Camara:
     def __init__(self, i, nom, usu, con):
         self.ip = i
@@ -47,13 +48,13 @@ def video(nom):
     for i in range(len(a)):
             if a[i].nombre==nom:
                 vidcam=a[i]
-    nes= Streaming("rtp","192.168.1.11", "8090", vidcam.nombre, "ffplay rtp://192.168.1.11:8090/" + vidcam.nombre)
+    nes= Streaming("udp","192.168.1.11", "8090", vidcam.nombre, "ffplay udp://192.168.1.11:8090/" + vidcam.nombre)
     sesion = "ffmpeg -i http://"+vidcam.usuario+":"+vidcam.contrasena+"@"+vidcam.ip+"/video/mjpg.cgi -f mpegts "+nes.protocolo+"://"+nes.ip+":"+nes.puerto+"/"+nes.dominio;
     print(sesion)
     return nes
 
 
-server = SOAPpy.SOAPServer(("127.0.0.1", 8080))
+server = SOAPpy.SOAPServer(("192.168.1.11", 8080))
 server.registerFunction(NuevaCamara)
 server.registerFunction(ObtenerCamara)
 server.registerFunction(EliminarCamara)
