@@ -1,0 +1,9 @@
+para obtener la ip de camara trendnet hay que realizar los siguientes pasos:
+
+1.- primero hay que acceder al siguente sitio: 80807862.cam.trendnetcloud.com
+
+2.-ya que se accede al sitio, revisar en el panel izquierdo que la camara este en el modo 1, si no es asi hay que reiniciar la camara 
+
+3.- en configuracion entrar a la pestaña de imagen 
+
+4.- ahi mostrara una url que incluye la ip de la camara 
