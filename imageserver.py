@@ -1,6 +1,6 @@
 import SOAPpy
 import os
-#os.system('ffmpeg -f mpeg -i http://admin:Oaxaca123@192.168.1.12/video/mjpg.cgi -f mpegts udp://192.168.1.11:8090/camara1')
+#os.system('ffmpeg -i http://admin:Oaxaca123@192.168.1.12/video/mjpg.cgi\?profileid\=3 -f mpegts udp://192.168.1.11:8090/camara1')
 class Camara:
     def __init__(self, i, nom, usu, con):
         self.ip = i
