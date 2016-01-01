@@ -1,4 +1,12 @@
 var Vista = (function(){
+	var _panelCamaras = function(numero){
+		var section = document.querySelector("#paneCamera");
+		for(var i = 0; i <= numero; i++){
+			var div = document.createElement("div");
+			section.appendChild(div);
+		}
+	};
+
 	var _listarCamaras = function(){
 		var select = document.querySelector("#setCamera");
 		var arregloCamaras = [1,2,3,4,5,6]; //ÉSTO ES PARA EJEMPLIFICAR
@@ -11,7 +19,8 @@ var Vista = (function(){
 	};
 
 	return {
-		"listarCamaras": _listarCamaras
+		"listarCamaras": _listarCamaras,
+		"panelCamaras": _panelCamaras
 	};
 
 })();
