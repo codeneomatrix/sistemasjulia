@@ -51,10 +51,10 @@ def video(nom):
     nes= Streaming("udp","192.168.1.11", "8090", vidcam.nombre, "ffplay udp://192.168.1.11:8090/" + vidcam.nombre)
     sesion = "ffmpeg -i http://"+vidcam.usuario+":"+vidcam.contrasena+"@"+vidcam.ip+"/video/mjpg.cgi -f mpegts "+nes.protocolo+"://"+nes.ip+":"+nes.puerto+"/"+nes.dominio;
     print(sesion)
-    return nes
+    return [nes]
 
 
-server = SOAPpy.SOAPServer(("192.168.1.11", 8080))
+server = SOAPpy.SOAPServer(("192.168.0.3", 8080))
 server.registerFunction(NuevaCamara)
 server.registerFunction(ObtenerCamara)
 server.registerFunction(EliminarCamara)

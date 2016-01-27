@@ -1,94 +1,85 @@
-include("ffmpeg.jl")
-using HttpServer
+using Merly
 
-#listacam=()
-http = HttpHandler() do req::Request, res::Response
-  
-      if ismatch(r"^/camara1/", req.resource)
-        reqsplit = split(req.resource, "/")
-        # ...snip validation...#
-        probstr = reqsplit[3]
-        if probstr == "video"
-          return Response(200, 
-        """<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-            <s:Header />
-            <s:Body>
-              <videoResponse xmlns="http://tempuri.org/">
-                <videoResult xmlns:a="http://schemas.datacontract.org/2004/07/imageservice" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-                  <a:dominio>camara1</a:dominio>
-                  <a:ffplay>ffplay udp://192.168.1.11:8090/camara1</a:ffplay>
-                  <a:ip>192.168.1.11</a:ip>
-                  <a:protocolo>udp</a:protocolo>
-                  <a:puerto>8090</a:puerto>
-                </videoResult>
-              </videoResponse>
-            </s:Body>
-          </s:Envelope>""")
-        end
-        if probstr == "datos"
-          return Response(200, "mostrando los datos de la camara1")
-        end
-      end
-      if ismatch(r"^/camaras/", req.resource)
-        reqsplit = split(req.resource, "/")
-        # ...snip validation...#
-        probstr = reqsplit[3]
-        if probstr == "nuevo"
-          return Response(200, 
-        """<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-            <s:Header />
-            <s:Body>
-              <NuevaCamaraResponse xmlns="http://tempuri.org/">
-                <NuevaCamaraResult>true</NuevaCamaraResult>
-              </NuevaCamaraResponse>
-            </s:Body>
-          </s:Envelope>""")
-          #cam1 = Cam("camara1","admin","","192.168.1.12")
-          #push!(listacam, cam1)
-        end
-        if probstr == ""
-           return Response(200, 
-        """<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-            <s:Header>
-              <Action s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://tempuri.org/Icamaras/ObtenerCamara</Action>
-            </s:Header>
-            <s:Body>
-              <ObtenerCamara xmlns="http://tempuri.org/" />
-            </s:Body>
-          </s:Envelope>
-          respuesta
-          <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-            <s:Header />
-            <s:Body>
-              <ObtenerCamaraResponse xmlns="http://tempuri.org/">
-                <ObtenerCamaraResult xmlns:a="http://schemas.datacontract.org/2004/07/imageservice" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-                  <a:Camara>
-                    <a:contraseña />
-                    <a:ip>192.168.1.10</a:ip>
-                    <a:nombre>camara1</a:nombre>
-                    <a:usuario>admin</a:usuario>
-                  </a:Camara>
-                </ObtenerCamaraResult>
-              </ObtenerCamaraResponse>
-            </s:Body>
-          </s:Envelope>""")
-        end
-        if probstr == "delete"
-          return Response(200, 
-        """<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-            <s:Header />
-            <s:Body>
-              <EliminarCamaraResponse xmlns="http://tempuri.org/">
-                <EliminarCamaraResult>true</EliminarCamaraResult>
-              </EliminarCamaraResponse>
-            </s:Body>
-          </s:Envelope>""")
-        end
-      else
-        # Not a valid URL
-        return Response(404)
+server = Merly.app()
+
+  @page "/" "Hello World!"
+
+  @page "/camaras" begin
+    h["Content-Type"]="application/json"
+    JSON.json(listacam)
   end
-end
 
-server = Server( http )
-run(server, host=IPv4(192,168,0,4), port=9000)
+  @page "/camaras/:nombre" begin
+    h["Content-Type"]="application/json"
+    println("params: ",params)
+    for i=listacam[1:end]
+       if i.nombre==params["nombre"]
+         return JSON.json(i)
+       end
+    end
+    return "[{}]"
+  end
+
+  @page "/camaras/:nombre/video" begin
+    h["Content-Type"]="application/json"
+    println("params: ",params)
+    for i=listacam[1:end]
+       if i.nombre==params["nombre"]
+         return JSON.json(optvideo(i))
+       end
+    end
+    return "[{}]"
+  end
+
+  @route POST "/camaras" begin
+    h["Content-Type"]="application/json"
+    println("body: ",body)
+    try
+      nombren=body["nombre"]
+      push!(listacam,Cam(nombren,body["usuario"],body["contra"],body["ip"]))
+      h["Location"]="/camaras/"*nombren
+      res.status= 201
+    catch
+      res.status= 400
+    end
+  end
+
+  @route PUT "/camaras/:nombre" begin
+    h["Content-Type"]="application/json"
+    println("params: ",params)
+    println("body: ",body)
+    try
+
+      for i=listacam[1:end]
+         if i.nombre==params["nombre"]
+          i.nombre=body["nombre"]
+          i.usuario=body["usuario"]
+          i.contra=body["contra"]
+          i.ip=body["ip"]
+         end
+      end
+
+      res.status=200
+    catch
+      res.status=400
+    end
+  end
+
+  @route DELETE "/camaras/:nombre" begin
+    h["Content-Type"]="application/json"
+    println("params: ",params)
+		try
+      for i=1:length(listacam)
+         if listacam[i].nombre==params["nombre"]
+           splice!(listacam,i)
+           res.status=200
+           return ""
+         end
+      end
+
+    catch
+			res.status=400
+		end
+  end
+
+server.start("192.168.0.3", 8080)
