@@ -6,6 +6,12 @@ type Cam
 	ip::AbstractString
 end
 
+type Usuario
+  nombre::AbstractString
+  contra::AbstractString
+  camaras 
+end
+
 function optvideo(x)
   Dict(
    "http"=>"http://$(x.usuario):$(x.contra)@$(x.ip)/video/mjpg.cgi",
@@ -19,3 +25,4 @@ function optimg(x)
 end
 
 global listacam=[]
+global listausr=[]

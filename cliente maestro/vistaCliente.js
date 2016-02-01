@@ -77,15 +77,3 @@ var Vista = (function(){
 	};
 
 })();
-
-
-
-
-?COUNTER
-?COUNTER
-?COUNTER
-?COUNTER
-?COUNTER
-?COUNTER
-?COUNTER
-?COUNTER
