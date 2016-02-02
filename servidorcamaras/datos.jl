@@ -1,4 +1,4 @@
-
+using Nettle
 type Cam
 	nombre::AbstractString
 	usuario::AbstractString
