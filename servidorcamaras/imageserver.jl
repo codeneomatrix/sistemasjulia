@@ -1,5 +1,11 @@
 using Merly
 
+#lu=[Usuario("juan","hola",[Aplicacion("apli",["cam1","cam2"])])]
+#lu[1].aplicaciones[1].camaras
+
+# {"nombre":"yo",
+#    "contra":"ki",
+#        "aplicaciones":[{"nombreapp":"apli","camaras":["cam1","cam2"]}]}
 
 server = Merly.app()
 
@@ -13,6 +19,16 @@ server = Merly.app()
   @page "/usuarios" begin
     h["Content-Type"]="application/json"
     JSON.json(listausr)
+  end
+
+  @page "/usuarios/:nombre/aplicaciones" begin
+    h["Content-Type"]="application/json"
+    for i=listausr[1:end]
+       if i.nombre==params["nombre"]
+          return JSON.json(i.aplicaciones)
+       end
+    end
+    return "[{}]"
   end
 
   @page "/camaras/:nombre" begin
@@ -64,9 +80,18 @@ server = Merly.app()
   @route POST "/usuarios" begin
     h["Content-Type"]="application/json"
     println("body: ",body)
+    
+    la=[]
     try
       nombren=body["nombre"]
-      push!(listausr,Usuario(nombren,hexdigest("md5", string(body["contra"])),body["camaras"]))
+      
+      
+        for i=body["aplicaciones"][1:end]
+          push!(la,Aplicacion(i["nombreapp"],i["camaras"]))
+        end
+      
+
+      push!(listausr,Usuario(nombren,hexdigest("md5", string(body["contra"])),la))
       h["Location"]="/usuarios/"*nombren
       res.status= 201
     catch
@@ -99,13 +124,18 @@ server = Merly.app()
     h["Content-Type"]="application/json"
     println("params: ",params)
     println("body: ",body)
+    la=[]
     try
+
+      for i=body["aplicaciones"][1:end]
+          push!(la,Aplicacion(i["nombreapp"],i["camaras"]))
+      end
 
       for i=listausr[1:end]
          if i.nombre==params["nombre"]
           i.nombre=body["nombre"]
           i.contra=hexdigest("md5", string(body["contra"]))
-          i.ip=body["camaras"]
+          i.aplicaciones=la
          end
       end
 
@@ -147,4 +177,4 @@ server = Merly.app()
     end
   end
 
-server.start("192.168.0.3", 8080)
+server.start("192.168.0.2", 8080)
