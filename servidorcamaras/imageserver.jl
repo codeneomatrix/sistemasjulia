@@ -13,16 +13,22 @@ server = Merly.app()
 
   @page "/camaras" begin
     h["Content-Type"]="application/json"
+    h["Access-Control-Allow-Origin"]="*"
+    h["Access-Control-Allow-Methods"]="POST,GET,OPTIONS"
     JSON.json(listacam)
   end
 
   @page "/usuarios" begin
     h["Content-Type"]="application/json"
+    h["Access-Control-Allow-Origin"]="*"
+    h["Access-Control-Allow-Methods"]="POST,GET,OPTIONS"
     JSON.json(listausr)
   end
 
   @page "/usuarios/:nombre/aplicaciones" begin
     h["Content-Type"]="application/json"
+    h["Access-Control-Allow-Origin"]="*"
+    h["Access-Control-Allow-Methods"]="POST,GET,OPTIONS"
     for i=listausr[1:end]
        if i.nombre==params["nombre"]
           return JSON.json(i.aplicaciones)
@@ -33,6 +39,8 @@ server = Merly.app()
 
   @page "/camaras/:nombre" begin
     h["Content-Type"]="application/json"
+    h["Access-Control-Allow-Origin"]="*"
+    h["Access-Control-Allow-Methods"]="POST,GET,OPTIONS"
     println("params: ",params)
     for i=listacam[1:end]
        if i.nombre==params["nombre"]
@@ -44,6 +52,8 @@ server = Merly.app()
 
   @page "/usuarios/:nombre" begin
     h["Content-Type"]="application/json"
+    h["Access-Control-Allow-Origin"]="*"
+    h["Access-Control-Allow-Methods"]="POST,GET,OPTIONS"
     println("params: ",params)
     for i=listausr[1:end]
        if i.nombre==params["nombre"]
@@ -55,6 +65,8 @@ server = Merly.app()
 
   @page "/camaras/:nombre/video" begin
     h["Content-Type"]="application/json"
+    h["Access-Control-Allow-Origin"]="*"
+    h["Access-Control-Allow-Methods"]="POST,GET,OPTIONS"
     println("params: ",params)
     for i=listacam[1:end]
        if i.nombre==params["nombre"]
@@ -177,4 +189,4 @@ server = Merly.app()
     end
   end
 
-server.start("192.168.0.2", 8080)
+server.start("192.168.1.157", 8080)
