@@ -12,9 +12,9 @@ def main():
 #print(type(encoded_string))
 
 if __name__ == '__main__':
-	for x in range(30):
+	for x in range(5):
 		print("obteniendo imagen "+str(x))
-		url = 'http://localhost:5000/getImage'
+		url = 'http://192.168.1.107:5000/getImage'
 		r = requests.get(url)
 		if r.status_code==200:
 			deco=base64.b64decode(r.text)

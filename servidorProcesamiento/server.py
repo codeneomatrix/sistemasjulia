@@ -11,11 +11,10 @@ app = Flask(__name__)
 #CORS(app)
 @app.after_request
 def add_cors(resp):
-	resp.headers['Access-Control-Allow-Origin']=request.headers.get('origin')
+	resp.headers['Access-Control-Allow-Origin']='*'
 	resp.headers['Access-Control-Allow-Credentials']='true'
 	resp.headers['Access-Control-Allow-Methods']='GET'
 	resp.headers['Access-Control-Allow-Headers']=request.headers.get('Access-Control-Request-Headers','Authorization')
-
 	if app.debug:
 		resp.headers['Access-Control-Max-Age']='1'
 	return resp
@@ -88,4 +87,5 @@ def funcion2():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.debug="false"
+	app.run(host='0.0.0.0')
