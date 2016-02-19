@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask,request
+from flask.ext.cors import CORS
 import numpy
 import subprocess as sp
 import base64
@@ -7,6 +8,19 @@ from io import BytesIO
 import cStringIO
 
 app = Flask(__name__)
+#CORS(app)
+@app.after_request
+def add_cors(resp):
+	resp.headers['Access-Control-Allow-Origin']=request.headers.get('origin')
+	resp.headers['Access-Control-Allow-Credentials']='true'
+	resp.headers['Access-Control-Allow-Methods']='GET'
+	resp.headers['Access-Control-Allow-Headers']=request.headers.get('Access-Control-Request-Headers','Authorization')
+
+	if app.debug:
+		resp.headers['Access-Control-Max-Age']='1'
+	return resp
+
+
 
 def read(fuente,ancho,alto): 
 	command = [ "ffmpeg",
@@ -51,7 +65,7 @@ def toGray(img):#recibe como parametro un String es decir una imagen codificada 
 
 
 
-@app.route('/') 	
+@app.route('/')
 def index():
     return "Hello, World!"
 
@@ -66,8 +80,10 @@ def funcion1():
 
 @app.route('/getImage',methods=["GET"])
 def funcion2():
-	img=read("http://200.79.225.92:8080/mjpg/video.mjpg?COUNTER",480,360)
+	#img=read("http://187.217.216.173:80/mjpg/video.mjpg?COUNTER",480,360)
+	img=read("http://admin:Oaxaca123@192.168.1.171/video/mjpg.cgi?profile=2",640,352)
 	img=toGray(img)
+
 	return  img
 
 

@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 FFMPEG_BIN = "ffmpeg" 
 import subprocess as sp
 command = [ FFMPEG_BIN,
-            '-i', 'http://187.217.216.173:80/mjpg/video.mjpg',
+            #'-i', 'http://187.217.216.173:80/mjpg/video.mjpg',
+            '-i','http://admin:@192.168.1.107/video/mjpg.cgi',
             '-f', 'image2pipe',
             '-pix_fmt', 'rgb24',
             '-vcodec', 'rawvideo', '-']
