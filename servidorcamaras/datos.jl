@@ -14,6 +14,8 @@ end
 type Usuario
   nombre::AbstractString
   contra::AbstractString
+  telefono::AbstractString
+  correo::AbstractString
   aplicaciones
 end
 

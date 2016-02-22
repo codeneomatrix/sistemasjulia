@@ -103,7 +103,7 @@ server = Merly.app()
         end
       
 
-      push!(listausr,Usuario(nombren,hexdigest("md5", string(body["contra"])),la))
+      push!(listausr,Usuario(nombren,hexdigest("md5", string(body["contra"])),body["telefono"],body["correo"],la))
       h["Location"]="/usuarios/"*nombren
       res.status= 201
     catch
@@ -147,6 +147,8 @@ server = Merly.app()
          if i.nombre==params["nombre"]
           i.nombre=body["nombre"]
           i.contra=hexdigest("md5", string(body["contra"]))
+          i.telefono=body["telefono"]
+          i.correo=body["correo"]
           i.aplicaciones=la
          end
       end
