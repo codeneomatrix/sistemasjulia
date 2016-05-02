@@ -2,7 +2,7 @@ import cv2
 import urllib 
 import numpy as np
 
-stream=urllib.urlopen('http://201.166.63.44/axis-cgi/mjpg/video.cgi')
+stream=urllib.urlopen('http://k133-200.mgmt.purdue.edu/axis-cgi/mjpg/video.cgi?camera=&amp;resolution=640x480')
 bytes=''
 while True:
     bytes+=stream.read(16384)
