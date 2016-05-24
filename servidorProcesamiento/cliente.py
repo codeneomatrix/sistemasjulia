@@ -1,6 +1,6 @@
 import requests,json,base64
 from io import BytesIO
- 
+
 def main():
   response = requests.get('http://localhost:5000')
   return response
@@ -14,11 +14,10 @@ def main():
 if __name__ == '__main__':
 	for x in range(5):
 		print("obteniendo imagen "+str(x))
-		url = 'http://192.168.1.107:5000/getImage'
+		url = 'http://127.0.0.1:5000/getImage'
 		r = requests.get(url)
 		if r.status_code==200:
 			deco=base64.b64decode(r.text)
 
 			with open("cliente/asinc"+str(x)+".jpg", 'wb') as f:  #se guarda en un archivo de imagen
 				f.write(deco)
-

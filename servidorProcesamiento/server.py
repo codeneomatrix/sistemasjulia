@@ -21,7 +21,7 @@ def add_cors(resp):
 
 
 
-def read(fuente,ancho,alto): 
+def read(fuente,ancho,alto):
 	command = [ "ffmpeg",
     	        #'-i', 'http://187.174.218.180:83/mjpg/video.mjpg?COUNTER',
         	    #'-ss', '00:03:12',
@@ -31,16 +31,16 @@ def read(fuente,ancho,alto):
             	'-vcodec', 'rawvideo', '-']
 	pipe = sp.Popen(command, stdout = sp.PIPE, bufsize=10**8)
 	raw_image = pipe.stdout.read(ancho*alto*3)
-	
+
 	image =  numpy.fromstring(raw_image, dtype='uint8')
 
 	image = image.reshape((alto,ancho,3))
-	
+
 
 	img = Image.fromarray(image, 'RGB')
-	
+
 	img.save('my.png')
-	
+
 	with open("my.png", "rb") as image_file:  #codificar imagen a base64 a partir de archivo
 		encoded_string = base64.b64encode(image_file.read())
 	pipe.terminate()
@@ -69,7 +69,7 @@ def index():
     return "Hello, World!"
 
 @app.route('/funciones/toGray',methods=["POST"])
-def funcion1():
+def funcion1(imagen):
 	if request.headers["accept"]=="application/json":
 		if not "imagen" in request.json:
 			abort(400)
@@ -79,10 +79,9 @@ def funcion1():
 
 @app.route('/getImage',methods=["GET"])
 def funcion2():
-	#img=read("http://187.217.216.173:80/mjpg/video.mjpg?COUNTER",480,360)
-	img=read("http://admin:Oaxaca123@192.168.1.171/video/mjpg.cgi?profile=2",640,352)
+	img=read("http://187.217.216.173:80/mjpg/video.mjpg?COUNTER",480,360)
+	#img=read("http://admin:Oaxaca123@192.168.1.171/video/mjpg.cgi?profile=2",640,352)
 	img=toGray(img)
-
 	return  img
 
 
