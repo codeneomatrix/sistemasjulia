@@ -34,7 +34,8 @@ def checkHour(inicial,final):
         print "no se emite alerta"
 
 
-stream=urllib.urlopen('http://k133-200.mgmt.purdue.edu/axis-cgi/mjpg/video.cgi?camera=&amp;resolution=640x480')
+#stream=urllib.urlopen('http://k133-200.mgmt.purdue.edu/axis-cgi/mjpg/video.cgi?camera=&amp;resolution=640x480')
+stream=urllib.urlopen('http://orion02.bglb.jp:8080/nphMotionJpeg?Resolution=640x480&Quality=Motion')
 bytes=''
 while True:
     bytes+=stream.read(16384)
