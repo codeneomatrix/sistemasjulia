@@ -16,7 +16,6 @@ class Flag():
     fechainit=[2016,5,25,1,30,12]
     fechafin=[2016,5,25,1,45,12]
 
-
 band=Flag()
 #instancia de api de telegram
 TOKEN='187037777:AAHx9qke0YQtgeOJAYlwQdLjdtMaVbZj8zw'
@@ -26,6 +25,7 @@ hog = cv2.HOGDescriptor()
 #instancia de la maquina de vector de  soporte para la deteccion de personas
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 #recibe dos listas de 6 elementos las cuales son los datetime inicial y final
+
 def checkHour(inicial,final):
     fecha = datetime.now().date()
     hora= datetime.now().time()
