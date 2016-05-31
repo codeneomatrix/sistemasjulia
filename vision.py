@@ -9,6 +9,8 @@ import threading
 from datetime import datetime, date, timedelta
 import telebot
 from PIL import Image
+global videolocal
+videolocal=True
 
 class Flag():
     flag=True
@@ -62,6 +64,18 @@ def peticion():
 #stream=urllib.urlopen('http://plottercam.wmbinc.com/mjpg/video.mjpg')
 #stream=urllib.urlopen('http://77.48.31.68/mjpg/video.mjpg')
 #"http://golfetangsale.axiscam.net:81/mjpg/video.mjpg"
+def vl():
+	global videolocal
+	global t_btn
+	if(videolocal==True):
+		videolocal=False
+		print "conectando a una camara remota...."
+		t_btn.config(text='conectar con camara local')
+	else:
+		videolocal=True
+		print "conectando con la camara de la computadora"
+		t_btn.config(text='conectar a camra remota')
+
 def camara():
 	global panelA
 	h1=str(hora_i.get()).split(':');
@@ -72,18 +86,15 @@ def camara():
 	band.fechafin[3]=int(h2[0])
 	band.fechafin[4]=int(h2[1])
 
-	stream=urllib.urlopen(str(urlcamara.get()))
-	bytes=''
-	while True:
-		bytes+=stream.read(16384)
-		a = bytes.find('\xff\xd8')
-		b = bytes.find('\xff\xd9')
-		if a!=-1 and b!=-1:
-			jpg = bytes[a:b+2]
-			bytes= bytes[b+2:]
+	
+
+	if(videolocal==True):
+		
+		cap = cv2.VideoCapture(0)
+		while(True):
 			global i
-			i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8),cv2.IMREAD_COLOR)
-			# deteccion de las personas en la imagen
+			ret, img = cap.read()
+			i=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 			(rects, weights) = hog.detectMultiScale(i,winStride=(4, 4),padding=(8, 8),scale=1.05)
 			if len(rects)>1 and band.flag and checkHour(band.fechainit,band.fechafin):
 				w = threading.Thread(target=peticion)
@@ -104,8 +115,41 @@ def camara():
 				panelA.configure(image=image)
 				panelA.image = image
 				root.update()
-			#if cv2.waitKey(1) ==27:
-			#	exit(0)
+	else:
+		stream=urllib.urlopen(str(urlcamara.get()))
+		bytes=''
+		while True:
+			bytes+=stream.read(16384)
+			a = bytes.find('\xff\xd8')
+			b = bytes.find('\xff\xd9')
+			if a!=-1 and b!=-1:
+				jpg = bytes[a:b+2]
+				bytes= bytes[b+2:]
+				global i
+				i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8),cv2.IMREAD_COLOR)
+				# deteccion de las personas en la imagen
+				(rects, weights) = hog.detectMultiScale(i,winStride=(4, 4),padding=(8, 8),scale=1.05)
+				if len(rects)>1 and band.flag and checkHour(band.fechainit,band.fechafin):
+					w = threading.Thread(target=peticion)
+					w.start()
+					band.flag=False
+				for rect in rects:
+					cv2.putText(i, str(len(rects))+" personas", (10,30),cv2.FONT_HERSHEY_DUPLEX, 1, (0, 255, 255), 3)
+					cv2.rectangle(i, (rect[0], rect[1]), (rect[0] + rect[2] , rect[1] + rect[3]), (255, 255, 0), 5)
+					cv2.putText(i, "Persona", (rect[0], rect[1]),cv2.FONT_HERSHEY_DUPLEX, 1, (0, 255, 255), 3)
+				#cv2.imshow('Hawkcam (video)',i)
+				image = Image.fromarray(i)
+				image = ImageTk.PhotoImage(image)
+				if panelA is None:
+					panelA = Label(image=image)
+					panelA.image = image
+					panelA.pack(side="left", padx=10, pady=10)
+				else:
+					panelA.configure(image=image)
+					panelA.image = image
+					root.update()
+				#if cv2.waitKey(1) ==27:
+				#	exit(0)
   
 root = Tk()
 root.title("Hawkcam")
@@ -136,8 +180,10 @@ hora_f = Entry(root, width=8, textvariable=valor)
 hora_f.insert(0, "12:00")
 hora_f.pack()
 
+t_btn = Button(root, text="conectar con video remoto", command=vl)
+t_btn.pack(pady=5)
+
 boton = Button(root, text="Iniciar", command=camara)
 boton.pack()
-
  
 root.mainloop()
